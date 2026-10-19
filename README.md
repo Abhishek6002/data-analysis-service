@@ -88,9 +88,15 @@ curl.exe "http://localhost:5000/query?genre=Drama"
 
 View query logs in PostgreSQL:
 
-```powershell
-docker compose exec db psql -U admin -d moviesdb -c "SELECT query_id, query_params, timestamp FROM queries_log ORDER BY query_id;"
-```
+Connect to the PostgreSQL container using the username and database name configured in your .env file: 
+
+docker compose exec db psql -U <your_db_user> -d <your_db_name> 
+
+At the psql prompt, run: 
+
+SELECT query_id, query_params, timestamp FROM queries_log ORDER BY query_id; 
+
+Confirm that each request to /query created a log entry. The /health endpoint does not need to be logged
 
 ## Database Persistence
 
